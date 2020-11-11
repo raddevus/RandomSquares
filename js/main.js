@@ -7,6 +7,28 @@ drawMap();
 console.time("howLong");
 let startTime = Date.now();
 
+var point = function(x,y)
+  {
+    this.x = x;
+    this.y = y;
+  };
+let mainCanvas = document.querySelector("#mainCanvas");
+addEventListener("mousemove",getMousePos);
+
+function getMousePos(evt) {
+  
+  var rect = mainCanvas.getBoundingClientRect();
+  var currentPoint = new point();
+  currentPoint.x = evt.clientX - rect.left;
+  currentPoint.y = evt.clientY - rect.top;
+
+  console.log(currentPoint);
+  return currentPoint;
+}
+
+
+
+
 function drawMap(){
 	if (squareCoords.size >=100){
         console.timeEnd("howLong");
@@ -43,7 +65,7 @@ function drawMap(){
 
     roundRect(ctx,(25*xRand)+offset,(25*yRand)+offset,20,20,{},true);
     if (!shouldStop){
-        setTimeout(drawMap,250);
+        setTimeout(drawMap,100);
     }
 }
 
