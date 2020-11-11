@@ -1,4 +1,4 @@
-var ctx = document.getElementById("mainCanvas").getContext("2d");
+let ctx = document.getElementById("mainCanvas").getContext("2d");
 
 let offset = 5; // offset from top and left edge
 let squareCoords = new Map();
@@ -7,27 +7,8 @@ drawMap();
 console.time("howLong");
 let startTime = Date.now();
 
-var point = function(x,y)
-  {
-    this.x = x;
-    this.y = y;
-  };
 let mainCanvas = document.querySelector("#mainCanvas");
-addEventListener("mousemove",getMousePos);
-
-function getMousePos(evt) {
-  
-  var rect = mainCanvas.getBoundingClientRect();
-  var currentPoint = new point();
-  currentPoint.x = evt.clientX - rect.left;
-  currentPoint.y = evt.clientY - rect.top;
-
-  console.log(currentPoint);
-  return currentPoint;
-}
-
-
-
+// addEventListener("mousemove",getMousePos);
 
 function drawMap(){
 	if (squareCoords.size >=100){
@@ -68,8 +49,6 @@ function drawMap(){
         setTimeout(drawMap,100);
     }
 }
-
-
 
 function getRandom(max){
 	return Math.floor((Math.random() * max));
@@ -127,3 +106,22 @@ function roundRect(ctx, x, y, width, height, radius, fill, stroke) {
   }
 
 }
+
+function getMousePos(evt) {
+  
+  var rect = mainCanvas.getBoundingClientRect();
+  var currentPoint = new Point();
+  currentPoint.x = evt.clientX - rect.left;
+  currentPoint.y = evt.clientY - rect.top;
+
+  console.log(currentPoint);
+  return currentPoint;
+}
+
+class Point
+{
+    constructor (x,y){
+    this.x = x;
+    this.y = y;
+    }
+};
